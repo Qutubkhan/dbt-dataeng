@@ -11,6 +11,7 @@ sources:
       - name: stackoverflow_posts
       - name: posts_answers
       - name: users
+      - name: badges
 
 models:
     - name: questions_answers_combined
@@ -46,4 +47,18 @@ models:
             description: "Each answer's id"
             tests:
                 - unique
+                - not_null
+    - name: users_badges
+      description: "Pivot the badges table"
+      columns:
+          - name: user_id
+            description: "Each user's id as well as the primary key for this table"
+            tests:
+                - unique
+                - not_null
+    - name: top_badges
+      description: "Select top 10 most commonly won badges"
+      columns:
+          - name: name
+            tests:
                 - not_null
