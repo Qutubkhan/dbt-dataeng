@@ -49,7 +49,7 @@ models:
                 - unique
                 - not_null
     - name: users_badges
-      description: "Pivot the badges table"
+      description: "Pivot the badges table by transforming the 'class' column"
       columns:
           - name: user_id
             description: "Each user's id as well as the primary key for this table"
@@ -62,3 +62,11 @@ models:
           - name: name
             tests:
                 - not_null
+    - name: users_combined
+      description: "Augment users data with total questions asked, total answers given, total gold/bronze/silver badges won"
+      columns:
+          - name: id
+            description: "Each user's id"
+            tests:
+                - not_null
+                - unique

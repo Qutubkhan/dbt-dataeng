@@ -3,8 +3,8 @@
 
 select
   user_id,
-  COUNT(CASE WHEN class = '1' then 1 ELSE NULL END) as Gold,
-  COUNT(CASE WHEN class = '2' then 1 ELSE NULL END) as Silver,
-  COUNT(CASE WHEN class = '3' then 1 ELSE NULL END) as Bronze 
+  COUNT(CASE WHEN class = '1' then 1 ELSE NULL END) as Gold_Badges,
+  COUNT(CASE WHEN class = '2' then 1 ELSE NULL END) as Silver_Badges,
+  COUNT(CASE WHEN class = '3' then 1 ELSE NULL END) as Bronze_Badges 
 from {{ ref('badges_casted') }}
 group by user_id
