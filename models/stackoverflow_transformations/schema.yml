@@ -21,19 +21,16 @@ models:
             description: "Each answer's id as well as the primary key for this table"
             tests:
                 - unique
-                - not_null
     - name: users_questions
       description: "Join users questions_answers_join table to get a full table of all questions asked by each user (posts made)"
       columns:
           - name: id
             description: "Each user's id as well as the primary key for this table"
             tests:
-                - unique
                 - not_null
           - name: question_id
             description: "Each question's id"
             tests:
-                - unique
                 - not_null
     - name: users_answers
       description: "Join users questions_answers_join table to get a full table of all answers given by each user"
@@ -41,7 +38,6 @@ models:
           - name: id
             description: "Each user's id as well as the primary key for this table"
             tests:
-                - unique
                 - not_null
           - name: answer_id
             description: "Each answer's id"
@@ -70,3 +66,38 @@ models:
             tests:
                 - not_null
                 - unique
+    - name: top_users_reputation_overall
+      description: "Find top 100 users by reputation overall "
+      columns:
+          - name: id
+            description: "Each user's id"
+            tests:
+                - not_null
+                - unique
+    - name: top_users_reputation_yearly
+      description: "Find top 100 users by reputation for every year "
+      columns:
+          - name: id
+            description: "Each user's id"
+            tests:
+                - not_null
+                - unique
+    - name: qa_combined_answered
+      description: "Filter questions that were answered "
+      columns:
+          - name: question_id
+            description: "Each question's id"
+            tests:
+                - not_null
+    - name: qa_combined_unanswered
+      description: "Filter questions that were unanswered "
+      columns:
+          - name: question_id
+            description: "Each question's id"
+            tests:
+                - not_null
+                - unique
+    - name: qa_combined_answered_user_stats
+      description: "Filter questions that were answered and get details of user who answered it"
+
+    
