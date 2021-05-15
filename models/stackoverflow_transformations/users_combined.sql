@@ -1,5 +1,7 @@
 -- Augment users data with total questions asked, total answers given, total gold/bronze/silver badges won
 
+{{ config(materialized='incremental') }}
+
 with cte1 as
 (
     select id, count(*) ct from {{ ref('users_questions') }} group by id
@@ -20,3 +22,7 @@ left join
 cte2 on x.id = cte2.id
 left join 
 {{ ref('users_badges') }} y on x.id = y.user_id
+
+{% if is_incremental() %}
+WHERE x.reputation > (SELECT AVG(reputation) FROM {{ this }})
+{% endif %}
