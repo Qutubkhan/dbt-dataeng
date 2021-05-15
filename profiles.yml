@@ -1,0 +1,23 @@
+dataengproj5: 
+  target: prod
+  outputs:
+    dev:
+      type: bigquery
+      method: service-account
+      keyfile: C:\Users\qkava\.dbt\dbt-user-creds.json # replace this with the full path to your keyfile
+      project: dbt-dataeng
+      dataset: dbt_qutub_dev 
+      threads: 1
+      timeout_seconds: 300
+      location: US
+      priority: interactive
+    prod:
+      type: bigquery
+      method: service-account
+      keyfile: C:\Users\qkava\.dbt\dbt-user-creds.json # replace this with the full path to your keyfile
+      project: dbt-dataeng
+      dataset: dbt_qutub_prod 
+      threads: 1
+      timeout_seconds: 300
+      location: US
+      priority: interactive
