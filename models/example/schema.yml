@@ -1,21 +1,49 @@
 
 version: 2
 
+sources:
+  - name: bq
+    database: bigquery-public-data
+    schema: stackoverflow
+    tables:
+      - name: posts_questions
+      - name: comments
+      - name: stackoverflow_posts
+      - name: posts_answers
+      - name: users
+
 models:
-    - name: my_first_dbt_model
-      description: "A starter dbt model"
+    - name: questions_answers_combined
+      description: "Model for joining stackoverflow questions and answers table, and removing unessential columns from answers table."
       columns:
-          - name: id
-            description: "The primary key for this table"
+          - name: answer_id
+            description: "Each answer's id as well as the primary key for this table"
             tests:
                 - unique
                 - not_null
-
-    - name: my_second_dbt_model
-      description: "A starter dbt model"
+    - name: users_questions
+      description: "Join users questions_answers_join table to get a full table of all questions asked by each user (posts made)"
       columns:
           - name: id
-            description: "The primary key for this table"
+            description: "Each user's id as well as the primary key for this table"
+            tests:
+                - unique
+                - not_null
+          - name: question_id
+            description: "Each question's id"
+            tests:
+                - unique
+                - not_null
+    - name: users_answers
+      description: "Join users questions_answers_join table to get a full table of all answers given by each user"
+      columns:
+          - name: id
+            description: "Each user's id as well as the primary key for this table"
+            tests:
+                - unique
+                - not_null
+          - name: answer_id
+            description: "Each answer's id"
             tests:
                 - unique
                 - not_null
